@@ -4,7 +4,7 @@ Materialize is a [Grav](http://github.com/getgrav/grav) theme that is based on t
 
 # Installation
 
-TODO
+Get the lastest zip version and unzip in theme folder of your grav installation.
 
 # Usage
 
