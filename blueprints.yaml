@@ -1,0 +1,27 @@
+name: Bootflat
+version: 0.1.0
+description: "Bootflat is a theme based an extension of bootstrap for **Grav**"
+icon: empire
+author:
+  name: Bastien DRONNEAU
+  email: basti1.dr@gmail.com
+  url: https://bastien.dronneau.fr
+homepage: https://github.com/basti1dr/grav-theme-bootflat
+demo: none
+keywords: bootflat, theme, bootstrap, flat, responsive, html5, css3
+bugs: https://github.com/basti1dr/grav-theme-bootflat/issues
+license: MIT
+
+form:
+  validation: loose
+  fields:
+    dropdown.enabled:
+        type: toggle
+        label: Dropdown in navbar
+        highlight: 1
+        default: 1
+        options:
+          1: Enabled
+          0: Disabled
+        validate:
+          type: bool
