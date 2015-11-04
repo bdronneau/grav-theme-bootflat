@@ -2,6 +2,12 @@
 
 Materialize is a [Grav](http://github.com/getgrav/grav) theme that is based on the [Bootflat framework](http://bootflat.github.io/).
 
+# Preview
+
+![Bootflat](assets/bootflat.gif)
+
+More [here](https://github.com/getgrav/grav-theme-antimatter/tree/master/assets)
+
 # Installation
 
 Get the lastest zip version and unzip in theme folder of your grav installation.
