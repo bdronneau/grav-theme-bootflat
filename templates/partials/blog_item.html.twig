@@ -1,0 +1,92 @@
+<div class="jumbotron">
+  {% set header_image = page.header.header_image|defined(true) %}
+  {% set header_image_width  = page.header.header_image_width|defined(900) %}
+  {% set header_image_height = page.header.header_image_height|defined(300) %}
+  {% set header_image_file = page.header.header_image_file %}
+
+  {% if header_image %}
+      {% if header_image_file %}
+          {% set header_image_media = page.media.images[header_image_file] %}
+      {% else %}
+          {% set header_image_media = page.media.images|first %}
+      {% endif %}
+      <div class="jumbotron-photo">{{ header_image_media.cropZoom(header_image_width, header_image_height).html }}</div>
+  {% endif %}
+
+  <div class="jumbotron-contents">
+    {% if page.header.link %}
+        <h4>
+            {% if page.header.continue_link is not sameas(false) %}
+            <a href="{{ page.url }}"><span class="glyphicon glyphicon-forward"></span></a>
+            {% endif %}
+            <a href="{{ page.header.link }}">{{ page.title }}</a>
+        </h4>
+    {% else %}
+        <h4><a href="{{ page.url }}">{{ page.title }}</a></h4>
+    {% endif %}
+
+    {% if page.header.continue_link is sameas(false) %}
+        {{ page.content }}
+        {% if not truncate %}
+        {% set show_prev_next = true %}
+        {% endif %}
+    {% elseif truncate and page.summary != page.content %}
+        {{ page.summary }}
+        <p><a href="{{ page.url }}">Continue Reading...</a></p>
+    {% elseif truncate %}
+        {% if page.summary != page.content %}
+            {{ page.content|truncate(550) }}
+        {% else %}
+            {{ page.content }}
+        {% endif %}
+        <p><a href="{{ page.url }}">Continue Reading...</a></p>
+    {% else %}
+        {{ page.content }}
+        {% set show_prev_next = true %}
+    {% endif %}
+
+    {% if show_prev_next %}
+    <p class="prev-next">
+      <div class='row'>
+        <div class='col-md-6'>
+          {% if not page.isFirst %}
+          <button type="button" class="btn btn-info btn-block" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Next Post" onclick="location.href='{{ page.nextSibling.url }}'"><span class="glyphicon glyphicon-chevron-left"></span></button>
+          {% endif %}
+        </div>
+        <div class='col-md-6'>
+          {% if not page.isLast %}
+          <button type="button" class="btn btn-info btn-block" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Previous Post" onclick="location.href='{{ page.prevSibling.url }}'"><span class="glyphicon glyphicon-chevron-right"></span></button>
+          {% endif %}
+        </div>
+      </div>
+    </p>
+    {% endif %}
+
+    {% if page.taxonomy.tag %}
+    <span class="tags">
+        <span class="glyphicon glyphicon-tag"></span>
+        {% for tag in page.taxonomy.tag %}
+        <span class="label simulate-click" onclick="javascript:location.href='{{ blog.url }}/tag{{ config.system.param_sep }}{{ tag }}'">{{ tag }}</span>
+        {% endfor %}
+    </span>
+    {% endif %}
+    <!-- TODO : use CSS -->
+    &nbsp;&nbsp;&nbsp;
+
+    <span>
+      {% if page.header.author.name or site.author.name %}
+        <span class="glyphicon glyphicon-user"></span>
+        {% if page.header.author %}
+          {{ page.header.author.name }}
+        {% else %}
+          {{ site.author.name }}
+        {% endif %}
+      {% endif %}
+    </span>
+
+    <span class="list-blog-date">
+      <span class="glyphicon glyphicon-calendar"></span> {{ page.date|date("F") }} {{ page.date|date("d") }}, {{ page.date|date("Y") }}</span>
+    </span>
+
+  </div>
+</div>

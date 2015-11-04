@@ -1,0 +1,17 @@
+{% set crumbs = breadcrumbs.get() %}
+{% set breadcrumbs_config = config.plugins.breadcrumbs %}
+{% set divider = breadcrumbs_config.icon_divider_classes %}
+
+<ol class="breadcrumb top-margin-header">
+  {% for crumb in crumbs %}
+    {% if not loop.last %}
+      <li><a href="{{ crumb.url }}" itemprop="url"><span itemprop="title">{{ crumb.menu }}</span></a></li>
+    {% else %}
+      {% if breadcrumbs_config.link_trailing %}
+        <li class="active"><a href="{{ crumb.url }}" itemprop="url"><span itemprop="title">{{ crumb.menu }}</span></a></li>
+      {% else %}
+        <li class="active"><span itemprop="title">{{ crumb.menu }}</span></li>
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+</ol>

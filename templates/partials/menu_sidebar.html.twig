@@ -1,0 +1,51 @@
+<nav id="cd-lateral-nav">
+  <ul class="cd-navigation cd-single-item-wrapper">
+    <!-- TODO : change color for active -->
+    {% for page in pages.children %}
+    {% if page.visible %}
+    {% set current_page = (page.active or page.activeChild) ? 'current' : '' %}
+    <li class="{{ current_page }}">
+      <a href="{{ page.url }}">
+        {{ page.menu }}
+      </a>
+    </li>
+    {% endif %}
+    {% endfor %}
+    {% for mitem in site.menu %}
+    <li>
+      <a href="{{ mitem.link }}">
+        {{ mitem.text }}
+        {% if mitem.description %}
+        <div class="menu-item-description">{{ mitem.description }}</div>
+        {% endif %}
+      </a>
+    </li>
+    {% endfor %}
+  </ul> <!-- cd-single-item-wrapper -->
+
+  <ul class="cd-navigation cd-single-item-wrapper">
+    <li><a href="/contact">Contact</a></li>
+  </ul> <!-- cd-single-item-wrapper -->
+
+  {% if config.plugins.taxonomylist.enabled %}
+  {% set taxlist = taxonomylist.get() %}
+    {% if taxlist %}
+    <ul class="cd-navigation">
+      <li class="item-has-children">
+        <a href="#0">Popular tags</a>
+        <ul class="sub-menu">
+          {% for tax, value in taxlist['tag'] %}
+      			<li><a href="{{ base_url }}/tag:{{ tax }}">{{ tax|capitalize }}</a></li>
+      		{% endfor %}
+        </ul>
+      </li> <!-- item-has-children -->
+    </ul>
+    {% endif %}
+  {% endif %}
+
+  <div class="cd-navigation socials">
+    <a class="cd-twitter cd-img-replace" href="https://twitter.com/bdronneau" target="_blank">Twitter</a>
+    <a class="cd-github cd-img-replace" href="https://github.com/bdronneau" target="_blank">GitHub</a>
+    <a class="cd-google cd-img-replace" href="https://plus.google.com/u/0/+BastienDronneau" target="_blank">Google Plus</a>
+  </div> <!-- socials -->
+</nav>

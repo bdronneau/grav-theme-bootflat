@@ -1,0 +1,63 @@
+{% embed 'partials/base.html.twig' %}
+
+    {% set collection = page.collection() %}
+    {% set base_url = page.url %}
+    {% set feed_url = base_url %}
+
+    {% if base_url == '/' %}
+    {% set base_url = '' %}
+    {% endif %}
+
+    {% if base_url == base_url_relative %}
+    {% set feed_url = base_url~'/'~page.slug %}
+    {% endif  %}
+
+    {% block caroussel %}
+    <!-- TODO : Go in partials -->
+        {% if page.header.slider and config.plugins.taxonomylist.enabled %}
+          <!-- Get all posts tag for caroussel -->
+          {% set posts = taxonomy.findTaxonomy({'tag':['highlight']}) %}
+          <div class="top-caroussel">
+            <div id="carousel-highlight" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                  {% for post in posts %}
+                    <li data-target="#carousel-highlight" data-slide-to="{{ loop.index }}" {% if i == '1' %}class='active'{% else %}class=''{% endif %}></li>
+                  {% endfor %}
+                </ol>
+                <div class="carousel-inner">
+                  {% for post in posts %}
+                  {% set firstImage = post.media.images|first %}
+                    <div class="item {% if loop.index == "1" %}active{% endif %}">
+                      <a href="{{ post.url }}">
+                        <img src="{{ firstImage.url }}" style="width:100%;" />
+                        <div class="carousel-caption">
+                          <h4>{{ post.title }}</h4>
+                        </div>
+                      </a>
+                    </div>
+                  {% endfor %}
+                </div>
+                <a class="left carousel-control" href="#carousel-highlight" data-slide="prev">
+                  <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="right carousel-control" href="#carousel-highlight" data-slide="next">
+                  <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+              </div>
+            </div>
+        {% endif %}
+    {% endblock %}
+
+    {% block content %}
+
+    {{ page.content }}
+        {% for child in collection %}
+          {% include 'partials/blog_item.html.twig' with {'blog':page, 'page':child, 'truncate':true} %}
+        {% endfor %}
+
+        {% if config.plugins.pagination.enabled and collection.params.pagination %}
+            {% include 'partials/pagination.html.twig' with {'base_url':page.url, 'pagination':collection.params.pagination} %}
+        {% endif %}
+    {% endblock %}
+
+{% endembed %}
