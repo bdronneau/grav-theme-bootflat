@@ -24,3 +24,7 @@ You have to tag your post with `highlight` and have an image in post folder in o
 Make sure to have equal ratio between the image of your posts selected for the caroussel.
 
 If you have multiple images, the first image is display in the caroussel.
+
+# Inspiration
+
+  * Menu https://codyhouse.co/gem/secondary-expandable-navigation/
