@@ -4,8 +4,8 @@
     {% for page in pages.children %}
     {% if page.visible %}
     {% set current_page = (page.active or page.activeChild) ? 'current' : '' %}
-    <li class="{{ current_page }}">
-      <a href="{{ page.url }}">
+    <li>
+      <a class="{{ current_page }}" href="{{ page.url }}">
         {{ page.menu }}
       </a>
     </li>
