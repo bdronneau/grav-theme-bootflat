@@ -6,7 +6,7 @@
     <div id="carousel-highlight" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
           {% for post in posts %}
-            <li data-target="#carousel-highlight" data-slide-to="{{ loop.index }}" {% if i == '1' %}class='active'{% else %}class=''{% endif %}></li>
+            <li data-target="#carousel-highlight" data-slide-to="{{ loop.index }}" {% if loop.index == '1' %}class='active'{% else %}class=''{% endif %}></li>
           {% endfor %}
         </ol>
         <div class="carousel-inner">
