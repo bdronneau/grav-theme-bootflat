@@ -1,11 +1,12 @@
 {% if page.header.slider and config.plugins.taxonomylist.enabled %}
   <!-- Get all posts tag for caroussel -->
-  {% set posts = taxonomy.findTaxonomy({'tag':['highlight']}) %}
+  {% set limit = (config.themes.bootflat.slider.limit) ? config.themes.bootflat.slider.limit : 5 %}
+  {% set posts = taxonomy.findTaxonomy({'tag':['highlight']})|reverse|slice(0, limit) %}
   <div class="top-caroussel">
     <div id="carousel-highlight" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
           {% for post in posts %}
-            <li data-target="#carousel-highlight" data-slide-to="{{ loop.index }}" {% if i == '1' %}class='active'{% else %}class=''{% endif %}></li>
+            <li data-target="#carousel-highlight" data-slide-to="{{ loop.index }}" {% if loop.index == '1' %}class='active'{% else %}class=''{% endif %}></li>
           {% endfor %}
         </ol>
         <div class="carousel-inner">

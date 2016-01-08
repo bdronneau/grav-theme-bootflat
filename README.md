@@ -25,6 +25,15 @@ Make sure to have equal ratio between the image of your posts selected for the c
 
 If you have multiple images, the first image is display in the caroussel.
 
+### Number of slides
+By default, the number of slides is limited to five. If you want to change this value, add in `user/config/themes/bootflat.yaml` the following directives :
+```yaml
+slider:
+  limit: 2
+```
+
+[Link](http://learn.getgrav.org/themes/theme-configuration) to getgrav documentation about theme configuration
+
 # Inspiration
 
   * Menu https://codyhouse.co/gem/secondary-expandable-navigation/
